@@ -32,12 +32,13 @@ public class TodoService {
     public ResponseEntity<Todo> updateTodoById(Todo todo, Long id){
         return todoRepopsitory.findById(id)
                 .map(todoToUpdate ->{
-                    todoToUpdate.setNomeDoTarefa(todo.getNomeDoTarefa());
+                    todoToUpdate.setNomeDoCliente(todo.getNomeDoCliente());
                     todoToUpdate.setDescricaoDaTarefa(todo.getDescricaoDaTarefa());
                     todoToUpdate.setAtualizadoEm(todo.getAtualizadoEm());
                     todoToUpdate.setStatus(todo.getStatus());
                     todoToUpdate.setResponsavelPelaTarefa(todo.getResponsavelPelaTarefa());
                     todoToUpdate.setSolicitante(todo.getSolicitante());
+                    todoToUpdate.setNomeDaTarefa(todo.getNomeDaTarefa());
                     Todo updated = todoRepopsitory.save(todoToUpdate);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
@@ -45,7 +46,7 @@ public class TodoService {
 
     public ResponseEntity<Object> deleteById (Long id){
         return todoRepopsitory.findById(id)
-                .map(taskToDelete ->{
+                .map(todoToDelete ->{
                     todoRepopsitory.deleteById(id);
                     return ResponseEntity.noContent().build();
                 }).orElse(ResponseEntity.notFound().build());

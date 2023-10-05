@@ -10,8 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.executable.ValidateOnExecution;
 import java.util.List;
 
 
@@ -33,7 +36,7 @@ public class TodoController {
 
     @PostMapping("/todos")
     @ResponseStatus(HttpStatus.CREATED)
-    public Todo createTodo(@RequestBody Todo todo) {
+    public Todo createTodo(@RequestBody @Valid @Validated Todo todo) {
         log.info("Criando uma nova tarefa com as informações [{}]", todo);
         return todoService.createTodo(todo);
     }
