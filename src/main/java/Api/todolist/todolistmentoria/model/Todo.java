@@ -21,31 +21,31 @@ public class Todo {
     private  Long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo NOME DO CLIENTE, não deve ser Em branco")
+    @NotBlank(message = "Campo NOME DO CLIENTE, não deve ser nulo")
     private String nomeDoCliente;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo NOME DA TAREFA, não deve ser Em branco")
+    @NotBlank(message = "Campo NOME DA TAREFA, não deve ser nulo")
     private String nomeDaTarefa;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo DESCRIÇÃO DA TAREFA, não deve ser Em branco")
+    @NotBlank(message = "Campo DESCRIÇÃO DA TAREFA, não deve ser nulo")
     private String descricaoDaTarefa;
 
     @Column(nullable = false)
-    @NotNull(message = "Campo DATA DA CONCLUSÃO, não deve ser Em branco")
+    @NotNull(message = "Campo DATA DA CONCLUSÃO, não deve ser nulo")
     private LocalDateTime dataDaConclusao;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo STATUS, não deve ser Em branco")
+    @NotBlank(message = "Campo STATUS, não deve ser nulo")
     private String status;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo RESPONSAVEL PELA TAREFA, não deve ser Em branco")
+    @NotBlank(message = "Campo RESPONSAVEL PELA TAREFA, não deve ser nulo")
     private String responsavelPelaTarefa;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo SOLICITANTE, não deve ser Em branco")
+    @NotBlank(message = "Campo SOLICITANTE, não deve ser nulo")
     private String solicitante;
 
     @CreationTimestamp
@@ -55,6 +55,9 @@ public class Todo {
     @UpdateTimestamp
     @Column(name = "atualizado_Em")
     private  LocalDateTime atualizadoEm;
+
+
+
 
     }
 
