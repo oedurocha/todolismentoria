@@ -5,11 +5,13 @@ import Api.todolist.todolistmentoria.todorepository.TodoRepopsitory;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Component
 @AllArgsConstructor
 public class TodoService {
 
