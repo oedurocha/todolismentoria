@@ -34,11 +34,13 @@ public class TodoController {
     })
 
     @PostMapping("/todos")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Todo createTodo(@RequestBody @Valid @Validated Todo todo) {
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Todo> createTodo(@RequestBody @Valid @Validated Todo todo) {
         log.info("Criando uma nova tarefa com as informações [{}]", todo);
-        return todoService.createTodo(todo);
+        Todo createdTodo = todoService.createTodo(todo);
+        return ResponseEntity.status(HttpStatus.OK).body(createdTodo);
     }
+
 
 
 
