@@ -1,6 +1,6 @@
 package Api.todolist.todolistmentoria;
 
-import Api.todolist.todolistmentoria.model.Todo;
+import Api.todolist.todolistmentoria.dto.TodoDto;
 import Api.todolist.todolistmentoria.todocontroller.TodoController;
 import Api.todolist.todolistmentoria.todoservice.TodoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TodoControllerTest {
+public class TodoDtoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,9 +47,9 @@ public class TodoControllerTest {
 
     @Test
     public void testCreateTodo() throws Exception {
-        Todo newTodo = new Todo();
+        TodoDto newTodo = new TodoDto();
 
-        when(todoService.createTodo(any(Todo.class))).thenReturn(newTodo);
+        when(todoService.createTodo(any(TodoDto.class))).thenReturn(newTodo);
 
         mockMvc.perform(post("/api/v1/todos")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -59,12 +59,12 @@ public class TodoControllerTest {
 
     @Test
     public void testGetAllTodo() {
-        List<Todo> todos = new ArrayList<>();
-        todos.add(new Todo());
-        todos.add(new Todo());
+        List<TodoDto> todos = new ArrayList<>();
+        todos.add(new TodoDto());
+        todos.add(new TodoDto());
 
         Mockito.when(todoService.listAllTodo()).thenReturn(todos);
-        List<Todo> result = todoController.getAllTodo();
+        List<TodoDto> result = todoController.getAllTodo();
 
         verify(todoService).listAllTodo();
         assertEquals(todos, result);
@@ -72,10 +72,10 @@ public class TodoControllerTest {
 
     @Test
     public void testGetTodoById() {
-        Todo todo = new Todo();
+        TodoDto todo = new TodoDto();
         Long todoId = 1L;
         Mockito.when(todoService.findTodoById(todoId)).thenReturn(ResponseEntity.ok(todo));
-        ResponseEntity<Todo> result = todoController.getTodoById(todoId);
+        ResponseEntity<TodoDto> result = todoController.getTodoById(todoId);
 
         verify(todoService).findTodoById(todoId);
         assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -85,9 +85,9 @@ public class TodoControllerTest {
     @Test
     public void testUpdateTodoById() {
         Long todoId = 1L;
-        Todo updatedTodo = new Todo();
+        TodoDto updatedTodo = new TodoDto();
         Mockito.when(todoService.updateTodoById(updatedTodo, todoId)).thenReturn(ResponseEntity.ok(updatedTodo));
-        ResponseEntity<Todo> result = todoController.updateTodoById(todoId, updatedTodo);
+        ResponseEntity<TodoDto> result = todoController.updateTodoById(todoId, updatedTodo);
 
         verify(todoService).updateTodoById(updatedTodo, todoId);
         assertEquals(HttpStatus.OK, result.getStatusCode());

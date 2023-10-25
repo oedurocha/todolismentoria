@@ -1,6 +1,7 @@
 package Api.todolist.todolistmentoria;
 
-import Api.todolist.todolistmentoria.model.Todo;
+import Api.todolist.todolistmentoria.dto.Status;
+import Api.todolist.todolistmentoria.dto.TodoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import javax.validation.ValidatorFactory;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class TodoTodoTest {
+public class TodoTodoTestDto {
 
     private Validator validator;
 
@@ -23,22 +24,24 @@ public class TodoTodoTest {
 
     @Test
     public void testValidTodo() {
-        Todo todo = new Todo();
+        TodoDto todo = new TodoDto();
         todo.setNomeDoCliente("Cliente");
         todo.setNomeDaTarefa("Tarefa");
         todo.setDescricaoDaTarefa("Descrição");
         todo.setDataDaConclusao(LocalDateTime.now());
-        todo.setStatus("Em Progresso");
+        todo.setStatus(Status.Em_Andamento);
+        todo.setStatus(Status.Pendente);
+        todo.setStatus(Status.Concluida);
         todo.setResponsavelPelaTarefa("Responsável");
         todo.setSolicitante("Solicitante");
-        Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
+        Set<ConstraintViolation<TodoDto>> violations = validator.validate(todo);
         assert(violations.isEmpty());
     }
 
     @Test
     public void testInvalidTodo() {
-        Todo todo = new Todo();
-        Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
+        TodoDto todo = new TodoDto();
+        Set<ConstraintViolation<TodoDto>> violations = validator.validate(todo);
             assert(violations.size() == 7);
     }
 }
