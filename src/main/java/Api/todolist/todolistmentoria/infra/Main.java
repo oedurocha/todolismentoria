@@ -1,6 +1,6 @@
 package Api.todolist.todolistmentoria.infra;
 
-import Api.todolist.todolistmentoria.model.Todo;
+import Api.todolist.todolistmentoria.dto.TodoDto;
 
 
 
@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        Todo todo = new Todo();
+        TodoDto todo = new TodoDto();
 
         todo.setSolicitante(null);
 
@@ -18,9 +18,9 @@ public class Main {
         Validator validator = factory.getValidator();
 
         try {
-            Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
+            Set<ConstraintViolation<TodoDto>> violations = validator.validate(todo);
             if (!violations.isEmpty()) {
-                for (ConstraintViolation<Todo> violation : violations) {
+                for (ConstraintViolation<TodoDto> violation : violations) {
                     System.out.println("Campo: " + violation.getPropertyPath());
                     System.out.println("Mensagem: " + violation.getMessage());
                 }

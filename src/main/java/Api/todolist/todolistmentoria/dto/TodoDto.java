@@ -1,4 +1,4 @@
-package Api.todolist.todolistmentoria.model;
+package Api.todolist.todolistmentoria.dto;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 
-public class Todo {
+public class TodoDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -37,8 +37,8 @@ public class Todo {
     private LocalDateTime dataDaConclusao;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo STATUS, não deve ser nulo")
-    private String status;
+    @NotNull(message = "Campo STATUS, não deve ser nulo")
+    private Status status;
 
     @Column(nullable = false)
     @NotBlank(message = "Campo RESPONSAVEL PELA TAREFA, não deve ser nulo")
@@ -55,8 +55,6 @@ public class Todo {
     @UpdateTimestamp
     @Column(name = "atualizado_Em")
     private  LocalDateTime atualizadoEm;
-
-
 
 
     }

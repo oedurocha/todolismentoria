@@ -1,6 +1,6 @@
 package Api.todolist.todolistmentoria.todocontroller;
 
-import Api.todolist.todolistmentoria.model.Todo;
+import Api.todolist.todolistmentoria.dto.TodoDto;
 import Api.todolist.todolistmentoria.todoservice.TodoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -34,11 +34,11 @@ public class TodoController {
     })
 
     @PostMapping("/todos")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Todo> createTodo(@RequestBody @Valid @Validated Todo todo) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<TodoDto> createTodo(@RequestBody @Valid @Validated TodoDto todo) {
         log.info("Criando uma nova tarefa com as informações [{}]", todo);
-        Todo createdTodo = todoService.createTodo(todo);
-        return ResponseEntity.status(HttpStatus.OK).body(createdTodo);
+        TodoDto createdTodo = todoService.createTodo(todo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
     }
 
 
@@ -52,7 +52,7 @@ public class TodoController {
     })
     @GetMapping("/todos")
     @ResponseStatus(HttpStatus.OK)
-    public List<Todo> getAllTodo() {
+    public List<TodoDto> getAllTodo() {
         log.info("Listando todas as tarefas cadastradas");
         return todoService.listAllTodo();
     }
@@ -65,7 +65,7 @@ public class TodoController {
     })
     @GetMapping("/todos/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Todo> getTodoById(@PathVariable (value = "id") Long id) {
+    public ResponseEntity<TodoDto> getTodoById(@PathVariable (value = "id") Long id) {
         log.info("Buscando tarefa com o id [{}]", id);
         return todoService.findTodoById(id);
     }
@@ -78,7 +78,7 @@ public class TodoController {
     })
     @PutMapping("/todos/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Todo> updateTodoById(@PathVariable(value = "id") Long id, @RequestBody Todo todo) {
+    public ResponseEntity<TodoDto> updateTodoById(@PathVariable(value = "id") Long id, @RequestBody TodoDto todo) {
         log.info("Atualizando a tarefa com id [{}] as novas informações são : [{}]",id, todo);
 
         return todoService.updateTodoById(todo, id);

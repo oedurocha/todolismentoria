@@ -1,6 +1,6 @@
 package Api.todolist.todolistmentoria.todoservice;
 
-import Api.todolist.todolistmentoria.model.Todo;
+import Api.todolist.todolistmentoria.dto.TodoDto;
 import Api.todolist.todolistmentoria.todorepository.TodoRepopsitory;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,21 +17,21 @@ public class TodoService {
 
     private TodoRepopsitory todoRepopsitory;
 
-    public Todo createTodo (Todo todo){
+    public TodoDto createTodo (TodoDto todo){
         return todoRepopsitory.save(todo);
     }
 
-    public List<Todo> listAllTodo(){
+    public List<TodoDto> listAllTodo(){
         return todoRepopsitory.findAll();
     }
 
-    public ResponseEntity<Todo> findTodoById(Long id){
+    public ResponseEntity<TodoDto> findTodoById(Long id){
         return  todoRepopsitory.findById(id)
                 .map(todo -> ResponseEntity.ok().body(todo))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<Todo> updateTodoById(Todo todo, Long id){
+    public ResponseEntity<TodoDto> updateTodoById(TodoDto todo, Long id){
         return todoRepopsitory.findById(id)
                 .map(todoToUpdate ->{
                     todoToUpdate.setNomeDoCliente(todo.getNomeDoCliente());
@@ -41,7 +41,7 @@ public class TodoService {
                     todoToUpdate.setResponsavelPelaTarefa(todo.getResponsavelPelaTarefa());
                     todoToUpdate.setSolicitante(todo.getSolicitante());
                     todoToUpdate.setNomeDaTarefa(todo.getNomeDaTarefa());
-                    Todo updated = todoRepopsitory.save(todoToUpdate);
+                    TodoDto updated = todoRepopsitory.save(todoToUpdate);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
     }
