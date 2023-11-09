@@ -1,6 +1,6 @@
 package Api.todolist.todolistmentoria;
 
-import Api.todolist.todolistmentoria.dto.Status;
+import Api.todolist.todolistmentoria.model.Status;
 import Api.todolist.todolistmentoria.dto.TodoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,9 +29,9 @@ public class TodoTodoTestDto {
         todo.setNomeDaTarefa("Tarefa");
         todo.setDescricaoDaTarefa("Descrição");
         todo.setDataDaConclusao(LocalDateTime.now());
-        todo.setStatus(Status.Em_Andamento);
-        todo.setStatus(Status.Pendente);
-        todo.setStatus(Status.Concluida);
+        todo.setStatus(Status.EM_ANDAMENTO);
+        todo.setStatus(Status.PENDENTE);
+        todo.setStatus(Status.CONCLUIDO);
         todo.setResponsavelPelaTarefa("Responsável");
         todo.setSolicitante("Solicitante");
         Set<ConstraintViolation<TodoDto>> violations = validator.validate(todo);

@@ -41,9 +41,6 @@ public class TodoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
     }
 
-
-
-
     @ApiOperation(value = "Listando todas as tarefas")
     @ApiResponses( value ={
             @ApiResponse(code = 200, message = "Tarefas listadas com sucesso"),
