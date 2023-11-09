@@ -1,8 +1,10 @@
 package Api.todolist.todolistmentoria.dto;
 
+import Api.todolist.todolistmentoria.model.Status;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +29,11 @@ public class TodoDto {
     @Column(nullable = false)
     @NotBlank(message = "Campo NOME DA TAREFA, não deve ser nulo")
     private String nomeDaTarefa;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime concluidoEm;
+
 
     @Column(nullable = false)
     @NotBlank(message = "Campo DESCRIÇÃO DA TAREFA, não deve ser nulo")
